@@ -4,6 +4,9 @@ import ReactHowler from "react-howler";
 import homeMusic from "../assets/home.mp3";
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import GamepadIcon from '@mui/icons-material/Gamepad';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 
 function Home() {
     const user = useSelector((state) => state.user?.users);
@@ -60,6 +63,18 @@ function Home() {
                         <span className="text-sm">You can view your quiz history.</span>
                     </button>            
                 </div>
+
+                <GamepadIcon fontSize="large" className="absolute bounce bottom-5 left-40 text-cyan-300" />
+                <GamepadIcon fontSize="large" className="absolute bounce bottom-11 right-20 text-cyan-300" />
+                <SportsEsportsIcon fontSize="large" className="absolute loader bottom-16 right-64 text-cyan-300" />
+                <SportsEsportsIcon fontSize="large" className="absolute loader bottom-32 left-64 text-cyan-300" />
+                <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 left-28 text-cyan-300" />
+                <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 right-28 text-cyan-300" />
+                <GamepadIcon fontSize="large" className="absolute bounce bottom-5 left-96 text-cyan-300" />
+                <GamepadIcon fontSize="large" className="absolute bounce bottom-11 right-96 text-cyan-300" />
+                <SportsEsportsIcon fontSize="large" className="absolute loader bottom-24 left-96 text-cyan-300" />
+                <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 right-96 text-cyan-300" />
+
             </div>
         </React.Fragment>
     )

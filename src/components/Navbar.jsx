@@ -21,8 +21,9 @@ function Navbar({music, setMusic, handleOpen}) {
                     { music ? <MusicNoteIcon /> : <MusicOffIcon /> }
                 </div>
                 { user.username ? 
-                    <div onClick={() => { } } className="cursor-pointer">
-                        <Avatar>{user.username[0]}</Avatar> 
+                    <div onClick={() => { } } className="cursor-pointer flex items-center gap-3">
+                        <Avatar>{user.username[0]}</Avatar>
+                        <p className="text-cyan-200">{user.username}</p> 
                     </div>
                     : 
                     <div onClick={() => { handleOpen() } } className="cursor-pointer">

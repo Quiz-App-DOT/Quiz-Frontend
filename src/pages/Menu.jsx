@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../components";
-import homeMusic from "../assets/home.mp3";
+import menuMusic from "../assets/menu.mp3";
 import ReactHowler from "react-howler";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import GamepadIcon from '@mui/icons-material/Gamepad';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import okSound from '../assets/ok.wav';
+import chooseSound from '../assets/choose.wav';
+import backSound from '../assets/back.wav';
+import useSound from 'use-sound';
+import Avatar from '@mui/material/Avatar';
+import { deleteUser } from "../redux/sliceUser";
 
 function Menu() {
     const user = useSelector((state) => state.user?.users);
     const navigate = useNavigate();
-    
+    const dispatch = useDispatch();
+
     const [music, setMusic] = useState(true);
+    const [okPlay] = useSound(music ? okSound : null);
+    const [choosePlay] = useSound(music ? chooseSound : null);
+    const [backPlay] = useSound(music ? backSound : null);
 
     function musicHandler() {
         setMusic(!music);
@@ -22,16 +35,48 @@ function Menu() {
     return (
         <React.Fragment>
             <ReactHowler
-                src={homeMusic}
+                src={menuMusic}
                 loop={true}
                 volume={music ? 0.2 : 0.0}
                 playing={true}
             />
 
             <Navbar music={music} setMusic={musicHandler} handleOpen={null} />
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-t from-slate-900 to-black">
-                <p className="text-white">WELCOME</p>
+            <div className="flex pt-32 place-content-evenly min-h-screen bg-gradient-to-t from-slate-900 to-black">
+                <div className="flex flex-col gap-4 justify-start">
+                    <p className="text-7xl text-cyan-200">Queez</p>
+                    <hr className="w-96 my-6" />
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>Play</button>
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>History</button>
+                    <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={() => { backPlay(); dispatch(deleteUser()); navigate('/') }}>Log Out</button>
+                </div>
+                <div className="text-white grid grid-cols-2 grid-rows-3 h-fit w-1/3 border border-cyan-300 p-3 rounded-lg bg-gradient-to-t from-black to-slate-800">
+                    <div className="col-span-2 flex items-center justify-center gap-3">
+                        <Avatar>{user.username[0]}</Avatar>
+                        <p className="text-cyan-200">{`${user.fullName} (${user.username})`}</p> 
+                    </div>
+                    <div className="col-span-2 flex justify-center">
+                        <p className="text-cyan-200">{`${user.email}`}</p>
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                        <p className="text-cyan-200">Participated: ?</p>
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                        <p className="text-cyan-200">Total Score: ?</p>
+                    </div>
+                </div>
             </div>
+
+            <GamepadIcon fontSize="large" className="absolute bounce bottom-5 left-40 text-cyan-300" />
+            <GamepadIcon fontSize="large" className="absolute bounce bottom-11 right-20 text-cyan-300" />
+            <SportsEsportsIcon fontSize="large" className="absolute loader bottom-16 right-64 text-cyan-300" />
+            <SportsEsportsIcon fontSize="large" className="absolute loader bottom-32 left-64 text-cyan-300" />
+            <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 left-28 text-cyan-300" />
+            <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 right-28 text-cyan-300" />
+            <GamepadIcon fontSize="large" className="absolute bounce bottom-5 left-96 text-cyan-300" />
+            <GamepadIcon fontSize="large" className="absolute bounce bottom-11 right-96 text-cyan-300" />
+            <SportsEsportsIcon fontSize="large" className="absolute loader bottom-24 left-96 text-cyan-300" />
+            <VideogameAssetIcon fontSize="large" className="absolute loader loader-inner bottom-40 right-96 text-cyan-300" />
         </React.Fragment>
     )
 }
