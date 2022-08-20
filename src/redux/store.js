@@ -2,10 +2,10 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { sliceUser } from "./sliceUser";
+import sliceUser from "./sliceUser";
 
 const reducer = combineReducers({
-    admin: sliceUser
+    user: sliceUser
 })
 
 const persistConfig = {

@@ -1,7 +1,8 @@
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import ProtectingRoute from "./protectingRoute";
+import Home from "../pages/Home";
+import Menu from "../pages/Menu";
 import { persistor, store } from "../redux/store";
 
 const Routers = () => {
@@ -22,6 +23,12 @@ const Routers = () => {
                             path="/"
                             element={
                                 <Home />
+                            }
+                        />
+                        <Route
+                            path="/menu"
+                            element={
+                                <Menu />
                             }
                         />
                     </Routes>
