@@ -6,6 +6,7 @@ const initialValue = {
     email: "",
     id: "",
     role: "",
+    token: "",
 }
 
 export const sliceUser = createSlice({
@@ -14,11 +15,11 @@ export const sliceUser = createSlice({
         users: initialValue
     },
     reducers: {
-        saveAdmin: (state, action) => {
+        saveUser: (state, action) => {
             const newUser = {...action.payload}
             state.users = newUser
         },
-        deleteAdmin: (state) => {
+        deleteUser: (state) => {
             state.users = initialValue
         }
     }
