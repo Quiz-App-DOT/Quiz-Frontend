@@ -18,8 +18,8 @@ function Home() {
     const [music, setMusic] = useState(useSelector((state) => state.music?.musics));
     const [openSignIn, setOpenSignIn] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
-    const [okPlay] = useSound(music ? okSound : null);
-    const [choosePlay] = useSound(music ? chooseSound : null);
+    const [okPlay] = useSound(okSound);
+    const [choosePlay] = useSound(chooseSound);
 
     function musicHandler() {
         setMusic(!music);
@@ -59,11 +59,11 @@ function Home() {
                 <section className="p-5" />
 
                 <div className="flex justify-evenly w-1/2">
-                    <button className="text-cyan-200 border-2 rounded-lg border-cyan-200 p-5 w-52 hover:bg-cyan-500 ease-in-out duration-200 hover:-translate-y-1 hover:scale-110 shadow-indigo-400 shadow-md" onMouseEnter={choosePlay} onClick={okPlay}>
+                    <button className="text-cyan-200 border-2 rounded-lg border-cyan-200 p-5 w-52 hover:bg-cyan-500 ease-in-out duration-200 hover:-translate-y-1 hover:scale-110 shadow-indigo-400 shadow-md" onMouseEnter={music ? choosePlay : null} onClick={music ? okPlay : null}>
                         <span className="text-2xl">Instant Quiz</span> <hr />
                         <span className="text-sm">You can take a kuis but your quiz history won't be add.</span>
                     </button>
-                    <button className="text-green-200 border-2 rounded-lg border-green-200 p-5 w-52 hover:bg-green-500 ease-in-out duration-200 hover:-translate-y-1 hover:scale-110 shadow-emerald-400 shadow-md" onClick={() => {okPlay(); handleOpenSignIn()} } onMouseEnter={choosePlay}>
+                    <button className="text-green-200 border-2 rounded-lg border-green-200 p-5 w-52 hover:bg-green-500 ease-in-out duration-200 hover:-translate-y-1 hover:scale-110 shadow-emerald-400 shadow-md" onClick={music ? () => {handleOpenSignIn(); okPlay()} : () => {handleOpenSignIn(); }} onMouseEnter={music ? choosePlay : null}>
                         <span className="text-2xl">Log In</span> <hr />
                         <span className="text-sm">You can view your quiz history.</span>
                     </button>            

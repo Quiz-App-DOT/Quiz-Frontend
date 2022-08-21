@@ -15,14 +15,15 @@ import Avatar from '@mui/material/Avatar';
 import { deleteUser } from "../redux/sliceUser";
 
 function Menu() {
+    const play = useSelector((state) => state.music?.musics);
     const user = useSelector((state) => state.user?.users);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [music, setMusic] = useState(useSelector((state) => state.music?.musics));
-    const [okPlay] = useSound(music ? okSound : null);
-    const [choosePlay] = useSound(music ? chooseSound : null);
-    const [backPlay] = useSound(music ? backSound : null);
+    const [music, setMusic] = useState(play);
+    const [okPlay] = useSound(okSound);
+    const [choosePlay] = useSound(chooseSound);
+    const [backPlay] = useSound(backSound);
 
     function musicHandler() {
         setMusic(!music);
@@ -52,9 +53,9 @@ function Menu() {
                 <div className="flex flex-col gap-4 justify-start">
                     <p className="text-7xl text-cyan-200">Queez</p>
                     <hr className="w-96 my-6" />
-                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>Play</button>
-                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>History</button>
-                    <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={() => { backPlay(); dispatch(deleteUser()); navigate('/') }}>Log Out</button>
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={okPlay}>Play</button>
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={okPlay}>History</button>
+                    <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { backPlay(); dispatch(deleteUser()); navigate('/') } : () => { dispatch(deleteUser()); navigate('/') } }>Log Out</button>
                 </div>
                 <div className="text-white grid grid-cols-2 grid-rows-3 h-fit w-1/3 border border-cyan-300 p-3 rounded-lg bg-gradient-to-t from-black to-slate-800">
                     <div className="col-span-2 flex items-center justify-center gap-3">
