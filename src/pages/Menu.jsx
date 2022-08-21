@@ -19,7 +19,7 @@ function Menu() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [music, setMusic] = useState(true);
+    const [music, setMusic] = useState(useSelector((state) => state.music?.musics));
     const [okPlay] = useSound(music ? okSound : null);
     const [choosePlay] = useSound(music ? chooseSound : null);
     const [backPlay] = useSound(music ? backSound : null);
@@ -42,13 +42,19 @@ function Menu() {
             />
 
             <Navbar music={music} setMusic={musicHandler} handleOpen={null} />
+            <div className="flex justify-center">
+                <div className="notification fixed mt-10">
+                    <p>Welcome to Queez, {user.username}</p>
+                    <span className="progress"></span>
+                </div>
+            </div>
             <div className="flex pt-32 place-content-evenly min-h-screen bg-gradient-to-t from-slate-900 to-black">
                 <div className="flex flex-col gap-4 justify-start">
                     <p className="text-7xl text-cyan-200">Queez</p>
                     <hr className="w-96 my-6" />
-                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>Play</button>
-                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>History</button>
-                    <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-fuchsia-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={() => { backPlay(); dispatch(deleteUser()); navigate('/') }}>Log Out</button>
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>Play</button>
+                    <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={okPlay}>History</button>
+                    <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={choosePlay} onClick={() => { backPlay(); dispatch(deleteUser()); navigate('/') }}>Log Out</button>
                 </div>
                 <div className="text-white grid grid-cols-2 grid-rows-3 h-fit w-1/3 border border-cyan-300 p-3 rounded-lg bg-gradient-to-t from-black to-slate-800">
                     <div className="col-span-2 flex items-center justify-center gap-3">
