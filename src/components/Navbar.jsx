@@ -6,15 +6,17 @@ import Avatar from '@mui/material/Avatar';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveMusic } from '../redux/sliceMusic';
+import { useNavigate } from "react-router-dom";
 
 function Navbar({music, setMusic, handleOpen}) {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector((state) => state.user?.users);
 
     return (
         <nav className="flex transition ease-in-out duration-200 bg-transparent items-center justify-between p-3 fixed top-0 z-10 w-full">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
                 <img alt='logo' src={logo} className="w-10 h-10 object-cover" />
                 <p className="text-2xl font-bold text-cyan-300">Queez</p>
             </div>

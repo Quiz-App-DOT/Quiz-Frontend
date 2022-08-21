@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
+import Play from "../pages/Play";
 import { persistor, store } from "../redux/store";
 
 const Routers = () => {
@@ -29,6 +30,12 @@ const Routers = () => {
                             path="/menu"
                             element={
                                 <Menu />
+                            }
+                        />
+                        <Route
+                            path="/play"
+                            element={
+                                <Play />
                             }
                         />
                     </Routes>
