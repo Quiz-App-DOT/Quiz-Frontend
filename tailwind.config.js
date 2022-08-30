@@ -4,7 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-	fontFamily: {
+	  fontFamily: {
       primary: ['OpenSans', 'sans-serif'],
       secondary: ['Lato', 'sans-serif']
     },

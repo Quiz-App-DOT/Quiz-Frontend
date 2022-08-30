@@ -157,4 +157,33 @@ code {
     border-radius: 4px;
     animation: progress 3.4s .25s linear forwards;
   }
+
+  @keyframes countdown {
+    from {
+      width: calc(100% - 10px);
+    }
+    to {
+      width: calc(0% - 10px);
+    }
+  }
+
+  .counter {
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #141619;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0,0,0,.1);
+  }
+
+  .countdown {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 0;
+    height: 7px;
+    background-image: linear-gradient(to right, #529bdb, #3250bf);
+    border-radius: 4px;
+    animation: countdown 10s linear forwards infinite;
+  }
 }
