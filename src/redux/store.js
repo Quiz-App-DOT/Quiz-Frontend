@@ -2,10 +2,12 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import sliceMusic from "./sliceMusic";
 import sliceUser from "./sliceUser";
 
 const reducer = combineReducers({
-    user: sliceUser
+    user: sliceUser,
+    music: sliceMusic,
 })
 
 const persistConfig = {
