@@ -34,7 +34,7 @@ function Quiz() {
     }
     
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/quiz/${id}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
+        axios.get(`${process.env.REACT_APP_API_URL}/api/quiz/${id}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
             setQuiz(res.data);
         })
@@ -42,7 +42,7 @@ function Quiz() {
             navigate('/');
         });
 
-        axios.get(`http://localhost:8000/api/ans/quiz/${id}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
+        axios.get(`${process.env.REACT_APP_API_URL}/api/ans/quiz/${id}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
             setAns(res.data);
             setIsLoading(false);

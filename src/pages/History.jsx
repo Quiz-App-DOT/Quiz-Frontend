@@ -33,7 +33,7 @@ function History() {
     }
     
     useEffect(() => {
-        axios.get('http://localhost:8000/api/my/quiz', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
+        axios.get(`${process.env.REACT_APP_API_URL}/api/my/quiz`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
             setQuiz(res.data);
             setIsLoading(false);

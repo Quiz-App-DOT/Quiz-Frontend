@@ -63,7 +63,7 @@ function Start({music}) {
 
     function handleSubmit() {
         setIsLoading(true);
-        axios.post('http://localhost:8000/api/quiz', { "userId": user.id, "question": question, "choices": choices }, {headers: { "Authorization": 'Bearer ' + user['token']} })
+        axios.post(`${process.env.REACT_APP_API_URL}/api/quiz`, { "userId": user.id, "question": question, "choices": choices }, {headers: { "Authorization": 'Bearer ' + user['token']} })
         .then(res => {
             navigate(`/quiz/${res.data.Quiz.id}`);
         })
@@ -73,7 +73,7 @@ function Start({music}) {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/quiz', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] } })
+        axios.get(`${process.env.REACT_APP_API_URL}/api/quiz`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] } })
         .then(res => {
             let result = res.data.results;
 

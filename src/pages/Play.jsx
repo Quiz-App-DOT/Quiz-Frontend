@@ -45,7 +45,7 @@ function Play() {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get("http://localhost:8000/api/me", { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
+        axios.get(`${process.env.REACT_APP_API_URL}/api/me`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
             setIsLoading(false);
             setActiveUser(res.data);
