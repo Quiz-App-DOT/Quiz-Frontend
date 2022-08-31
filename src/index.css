@@ -64,4 +64,138 @@ code {
       border-bottom-color: #fff;
       animation-duration: 2.5s;
   }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-25%) rotate(-10deg);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(0) rotate(-10deg);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .bounce {
+    animation: bounce 1s infinite;
+  }
+
+  .diagonal {
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .diagonal:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 4rem solid #000000;
+    border-left: 2rem solid #1e3a8a;
+    width: 0;
+  }
+
+  .diagonal:after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-bottom: 4rem solid #000000;
+    border-right: 2rem solid #1e3a8a;
+    width: 0;
+  }
+
+  @keyframes popin {
+    5% {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    95% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+  }
+
+  @keyframes progress {
+    to {
+      width: calc(100% - 10px);
+    }
+  }
+
+  .notification {
+    position: relative;
+    display: inline-block;
+    max-width: 300px;
+    padding: 20px 15px;
+    border-radius: 4px;
+    background-color: #141619;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0,0,0,.1);
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    animation: popin 4s linear forwards;
+  }
+
+  .progress {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 0;
+    height: 3px;
+    background-image: linear-gradient(to right, #529bdb, #3250bf);
+    border-radius: 4px;
+    animation: progress 3.4s .25s linear forwards;
+  }
+
+  @keyframes countdown {
+    from {
+      width: calc(100% - 10px);
+    }
+    to {
+      width: calc(0% - 10px);
+    }
+  }
+
+  .counter {
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #141619;
+    color: #f6f5f9;
+    box-shadow: 0 1px 10px rgba(0,0,0,.1);
+  }
+
+  .countdown {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 0;
+    height: 7px;
+    background-image: linear-gradient(to right, #529bdb, #3250bf);
+    border-radius: 4px;
+    animation: countdown 10s linear forwards infinite;
+  }
+
+  .history::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .history::-webkit-scrollbar-track {
+    background-color: #03a9f4;
+  }
+
+  .history::-webkit-scrollbar-thumb {
+    box-shadow: inset 20px 10px 20px rgba(75, 150, 70, 1);
+}
 }

@@ -31,7 +31,7 @@ function LoginForm({open, handleOpen, handleOpenSignUp}) {
                 role: res.data.user.role,
                 id: res.data.user.id,
                 email: res.data.user.email,
-                token: res.data.authorisation.token
+                token: res.data.authorization.token
             }));
             setIsLoading(false);
             navigate('/menu')
