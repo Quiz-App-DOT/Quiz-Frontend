@@ -6,10 +6,11 @@ import { formatQuestion } from "../utls/format";
 import okSound from '../assets/ok.wav';
 import useSound from 'use-sound';
 import Loading from "./Loading";
+import startMusic from '../assets/start.mp3';
+import ReactHowler from "react-howler";
 
-function Start() {
+function Start({music}) {
 
-    const play = useSelector((state) => state.music?.musics);
     const user = useSelector(state => state.user?.users);
     const navigate = useNavigate();
     const [okPlay] = useSound(okSound);
@@ -61,9 +62,10 @@ function Start() {
     }
 
     function handleSubmit() {
-        axios.post('http://localhost:8000/api/quiz/add', { question, choices }, {"Authorization": 'Bearer ' + user['token']})
+        setIsLoading(true);
+        axios.post('http://localhost:8000/api/quiz', { "userId": user.id, "question": question, "choices": choices }, {headers: { "Authorization": 'Bearer ' + user['token']} })
         .then(res => {
-            navigate(`/quiz/${res.data.id}`);
+            navigate(`/quiz/${res.data.Quiz.id}`);
         })
         .catch(err => {
             navigate('/');
@@ -99,8 +101,8 @@ function Start() {
         if (count <= 0) { 
             setCount(10); 
             if (number < 10) setNumber(prev => prev + 1); 
+            if (number == 10) { clearInterval(counter.current); handleSubmit(); };
         };
-        if (number >= 10) { clearInterval(counter.current); handleSubmit(); };
     }, [startCount, count, number])
 
     useEffect(() => {
@@ -111,6 +113,12 @@ function Start() {
 
     return (
         <React.Fragment>
+            <ReactHowler
+                src={startMusic}
+                loop={true}
+                volume={music ? 0.2 : 0.0}
+                playing={true}
+            />
             { isLoading ?
                 (   
                     <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-t from-slate-900 to-black">   
@@ -141,22 +149,22 @@ function Start() {
                                             <hr />
                                         </div>
                                         <div className="col-span-1">
-                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'a' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={play ? () => { handleChoice('a'); okPlay(); } : () => handleChoice('a') } >
+                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'a' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={music ? () => { handleChoice('a'); okPlay(); } : () => handleChoice('a') } >
                                                 <p className="text-cyan-400 text-left">A. {formatQuestion(question[number-1].answers[0])}</p>
                                             </button>
                                         </div>
                                         <div className="col-span-1">
-                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'b' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={play ? () => { handleChoice('b'); okPlay(); } : () => handleChoice('b') } >
+                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'b' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={music ? () => { handleChoice('b'); okPlay(); } : () => handleChoice('b') } >
                                                 <p className="text-cyan-400 text-left">B. {formatQuestion(question[number-1].answers[1])}</p>
                                             </button>
                                         </div>
                                         <div className="col-span-1">
-                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'c' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={play ? () => { handleChoice('c'); okPlay(); } : () => handleChoice('c') } >
+                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'c' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={music ? () => { handleChoice('c'); okPlay(); } : () => handleChoice('c') } >
                                                 <p className="text-cyan-400 text-left">C. {formatQuestion(question[number-1].answers[2])}</p>
                                             </button>
                                         </div>
                                         <div className="col-span-1">
-                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'd' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={play ? () => { handleChoice('d'); okPlay(); } : () => handleChoice('d') } >
+                                            <button className={`border w-full rounded-lg p-2 bg-black hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 ease-in-out duration-200 hover:-translate-y-1 shadow-indigo-400 shadow-md ${choices[number-1] === 'd' ? "bg-gradient-to-b from-orange-400 to-red-600" : null}`} onClick={music ? () => { handleChoice('d'); okPlay(); } : () => handleChoice('d') } >
                                                 <p className="text-cyan-400 text-left">D. {formatQuestion(question[number-1].answers[3])}</p>
                                             </button>
                                         </div>

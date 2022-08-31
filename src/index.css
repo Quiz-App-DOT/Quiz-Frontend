@@ -186,4 +186,16 @@ code {
     border-radius: 4px;
     animation: countdown 10s linear forwards infinite;
   }
+
+  .history::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .history::-webkit-scrollbar-track {
+    background-color: #03a9f4;
+  }
+
+  .history::-webkit-scrollbar-thumb {
+    box-shadow: inset 20px 10px 20px rgba(75, 150, 70, 1);
+}
 }

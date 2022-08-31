@@ -23,6 +23,8 @@ function Menu() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [music, setMusic] = useState(play);
+    const [total, setTotal] = useState(0);
+    const [score, setScore] = useState(0);
     const [okPlay] = useSound(okSound);
     const [choosePlay] = useSound(chooseSound);
     const [backPlay] = useSound(backSound);
@@ -35,6 +37,20 @@ function Menu() {
         setIsLoading(true);
         axios.get("http://localhost:8000/api/me", { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
+            
+        })
+        .catch(err => {
+            setIsLoading(false);
+            dispatch(deleteUser());
+            navigate('/');
+        })
+
+        axios.get('http://localhost:8000/api/my/quiz', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})        
+        .then(res => {
+            setTotal(res.data?.length ?? 0);
+            if (res.data?.length !== 0) {
+                setScore(res.data.reduce((a, b) => a + b.score, 0));
+            }
             setIsLoading(false);
         })
         .catch(err => {
@@ -70,7 +86,7 @@ function Menu() {
                         <p className="text-7xl text-cyan-200">Queez</p>
                         <hr className="w-96 my-6" />
                         <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { okPlay(); navigate('/play') } : () => { navigate('/play'); }}>Play</button>
-                        <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? okPlay : null}>History</button>
+                        <button className="bg-cyan-300 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-rose-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { okPlay(); navigate('/history') } : () => { navigate('/history'); }}>History</button>
                         <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { backPlay(); dispatch(deleteUser()); navigate('/') } : () => { dispatch(deleteUser()); navigate('/') } }>Log Out</button>
                     </div>
                     <div className="text-white grid grid-cols-2 grid-rows-3 h-fit w-1/3 border border-cyan-300 p-3 rounded-lg bg-gradient-to-t from-black to-slate-800">
@@ -82,10 +98,10 @@ function Menu() {
                             <p className="text-cyan-200">{`${user.email}`}</p>
                         </div>
                         <div className="col-span-1 flex justify-center">
-                            <p className="text-cyan-200">Participated: ?</p>
+                            <p className="text-cyan-200">Participated: {total}</p>
                         </div>
                         <div className="col-span-1 flex justify-center">
-                            <p className="text-cyan-200">Total Score: ?</p>
+                            <p className="text-cyan-200">Total Score: {score}</p>
                         </div>
                     </div>
                 </div>

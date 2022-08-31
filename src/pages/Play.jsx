@@ -70,7 +70,7 @@ function Play() {
 
             {start ? 
                 (
-                    <Start />
+                    <Start music={music} />
                 )
             :
                 (
