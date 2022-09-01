@@ -90,11 +90,14 @@ function Menu() {
                         <button className="bg-rose-400 border-l-8 border-l-green-600 w-80 text-2xl p-2 hover:w-96 ease-in-out duration-200 hover:border-r-8 hover:border-r-red-600 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { backPlay(); dispatch(deleteUser()); navigate('/') } : () => { dispatch(deleteUser()); navigate('/') } }>Log Out</button>
                     </div>
                     <div className="text-white grid grid-cols-2 grid-rows-3 h-fit w-1/3 border border-cyan-300 p-3 rounded-lg bg-gradient-to-t from-black to-slate-800">
-                        <div className="col-span-2 flex items-center justify-center gap-3">
+                        <div className="col-span-1 flex items-center justify-center gap-3">
                             <Avatar>{user.username[0]}</Avatar>
                             <p className="text-cyan-200">{`${user.fullName} (${user.username})`}</p> 
                         </div>
-                        <div className="col-span-2 flex justify-center">
+                        <div className="col-span-1 row-span-2 flex items-center justify-center p-7">
+                            <button className="bg-cyan-300 w-80 text-2xl rounded p-2 ease-in-out duration-200 hover:bg-gradient-to-b hover:from-fuchsia-400 hover:to-orange-400 hover:shadow-md hover:shadow-cyan-200" onMouseEnter={music ? choosePlay : null} onClick={music ? () => { okPlay(); navigate('/edit/me') } : () => { navigate('/edit/me'); }}>Edit</button>
+                        </div>
+                        <div className="col-span-1 flex justify-center">
                             <p className="text-cyan-200">{`${user.email}`}</p>
                         </div>
                         <div className="col-span-1 flex justify-center">
