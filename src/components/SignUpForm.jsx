@@ -25,7 +25,7 @@ function SignUpForm({open, handleOpen, handleOpenSignIn}) {
     
     const handleSubmit = () => {
         setIsLoading(true);
-        axios.post(`http://localhost:8000/api/signup`, inputData)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, inputData)
         .then(res => {
             dispatch(saveUser({
                 fullName: res.data.user.fullName,

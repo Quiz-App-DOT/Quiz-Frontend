@@ -35,7 +35,7 @@ function Menu() {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get("http://localhost:8000/api/me", { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
+        axios.get(`${process.env.REACT_APP_API_URL}/api/me`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})
         .then(res => {
             
         })
@@ -45,7 +45,7 @@ function Menu() {
             navigate('/');
         })
 
-        axios.get('http://localhost:8000/api/my/quiz', { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})        
+        axios.get(`${process.env.REACT_APP_API_URL}/api/my/quiz`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user['token'] }})        
         .then(res => {
             setTotal(res.data?.length ?? 0);
             if (res.data?.length !== 0) {

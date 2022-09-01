@@ -23,7 +23,7 @@ function LoginForm({open, handleOpen, handleOpenSignUp}) {
     
     const handleSubmit = () => {
         setIsLoading(true);
-        axios.post(`http://localhost:8000/api/login`, inputData)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/login`, inputData)
         .then(res => {
             dispatch(saveUser({
                 fullName: res.data.user.fullName,
