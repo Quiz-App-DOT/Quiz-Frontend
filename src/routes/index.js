@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import { Home, Menu, Play, History, Quiz } from "../pages/index";
+import { Home, Menu, Play, History, Quiz, EditUser } from "../pages/index";
 import { persistor, store } from "../redux/store";
 
 const Routers = () => {
@@ -46,6 +46,12 @@ const Routers = () => {
                             path="/quiz/:id"
                             element={
                                 <Quiz />
+                            }
+                        />
+                        <Route
+                            path="/edit/me"
+                            element={
+                                <EditUser />
                             }
                         />
                     </Routes>
